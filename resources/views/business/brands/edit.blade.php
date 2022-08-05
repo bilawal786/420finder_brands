@@ -7,7 +7,7 @@
     <section class="pb-0">
         <div class="container-fluid px-0">
           <div class="row">
-              @if ($brand->is_paid)
+              @if (!$brand->is_paid)
               <div class="col-md-12 p-5 bg-light">
                 <div class="card mb-5">
                   <div class="card-body">
@@ -24,17 +24,17 @@
                 <div class="card">
                   <div class="card-body pb-5">
                     @include('business.partials.success-error')
-                    
+
                     <form action="{{ route('updatebrand') }}" method="POST" enctype="multipart/form-data">
                       @csrf
                       <input type="hidden" name="brand_id" value="{{ $brand->id }}">
                       <div class="row">
                         <div class="col-md-2">
                           <label for="" class="pb-2">Avatar image</label>
-                          @if($brand->logo == NULL)
+                          @if($brand->profile_picture == NULL)
                             <img src="{{ asset('dummy.png') }}" alt="" class="w-100 img-thumbnail">
                           @else
-                            <img src="{{ $brand->logo }}" alt="" class="w-100 img-thumbnail">
+                            <img src="{{ $brand->profile_picture }}" alt="" class="w-100 img-thumbnail">
                           @endif
                           <div class="form-group mt-3">
                             <input type="file" name="logo" class="form-control">
@@ -57,11 +57,11 @@
                         <div class="col-md-10">
                           <div class="form-group pb-4">
                             <label for="">Name</label>
-                            <input type="text" name="name" value="{{ $brand->name }}" class="form-control" required="">
+                            <input type="text" name="name" value="{{ $brand->business_name }}" class="form-control" required="">
                           </div>
                           <div class="form-group">
                             <label for="">Description</label>
-                            <textarea id="editor1" name="description" cols="5" rows="5" class="form-control" required="">{{ $brand->description }}</textarea>
+                            <textarea id="editor1" name="description" cols="5" rows="5" class="form-control" required="">{{ $brand->introduction }}</textarea>
                           </div>
                           <div class="row mt-4">
                             <div class="col-md-6">
@@ -127,19 +127,19 @@
                               <h4><strong>Social Networks</strong></h4>
                               <div class="form-group pb-3">
                                 <label for="">Website URL</label>
-                                <input type="text" name="website_url" value="{{ $brand->website_url }}" placeholder="Enter brand website url" class="form-control">
+                                <input type="text" name="website_url" value="{{ $brand->website }}" placeholder="Enter brand website url" class="form-control">
                               </div>
                               <div class="form-group pb-3">
                                 <label for="">Instagram URL</label>
-                                <input type="text" name="instagram_url" value="{{ $brand->instagram_url }}" placeholder="Enter brand instagram url" class="form-control">
+                                <input type="text" name="instagram_url" value="{{ $brand->instagram }}" placeholder="Enter brand instagram url" class="form-control">
                               </div>
                               <div class="form-group pb-3">
                                 <label for="">Twitter URL</label>
-                                <input type="text" name="twitter_url" value="{{ $brand->twitter_url }}" placeholder="Enter brand twitter url" class="form-control">
+                                <input type="text" name="twitter_url" value="{{ $brand->twitter }}" placeholder="Enter brand twitter url" class="form-control">
                               </div>
                               <div class="form-group pb-3">
                                 <label for="">Facebook Page URL</label>
-                                <input type="text" name="facebook_url" value="{{ $brand->facebook_url }}" placeholder="Enter brand facebook page url" class="form-control">
+                                <input type="text" name="facebook_url" value="{{ $brand->facebook }}" placeholder="Enter brand facebook page url" class="form-control">
                               </div>
                             </div>
                           </div>
@@ -160,7 +160,7 @@
               <div class="card">
                   <div class="card-body">
                       <h5 class="mb-3">Please complete payment process</h5>
-                      <a href="{{ route('managebrandpayments', [$brand->slug, $brand->id]) }}" class="btn btn-primary">Go to payment</a>
+                      <a href="{{ route('managebrandpayments', [$brand->id]) }}" class="btn btn-primary">Go to payment</a>
                   </div>
               </div>
               </div>

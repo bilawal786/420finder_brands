@@ -18,7 +18,7 @@ class StoreController extends Controller {
 
     public function stores() {
 
-        $stores = Business::where('email', session('business_email'))->get();
+        $stores = Business::where('email', session('business_email'))->where('business_type', '!=', 'Brand')->get();
 
         return view('business.stores.index')
           ->with('stores', $stores);

@@ -14,7 +14,7 @@
                   </div>
                 </div>
 
-                @if ($brand->is_paid)
+                @if (!$brand->is_paid)
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <nav aria-label="breadcrumb" class="pt-2">
@@ -26,7 +26,7 @@
                     </nav>
                   </div>
                   <div class="col-md-6 text-end">
-                    <a href="{{ route('addbrandproduct', ['slug' => $brand->slug, 'id' => $brand->id]) }}" class="btn bg-white shadow-sm">Add Product</a>
+                    <a href="{{ route('addbrandproduct', ['id' => $brand->id]) }}" class="btn bg-white shadow-sm">Add Product</a>
                   </div>
                 </div>
                 <div class="card">
@@ -70,7 +70,7 @@
                                   @endif
                                 </td>
                                 <td>
-                                  <a href="{{ route('editbrandproduct', ['slug' => $brand->slug, 'brand_id' => $brand->id, 'product_id' => $product->id]) }}" class="btn border bg-white">Edit</a>
+                                  <a href="{{ route('editbrandproduct', ['brand_id' => $brand->id, 'product_id' => $product->id]) }}" class="btn border bg-white">Edit</a>
                                 </td>
                               </tr>
                             @endforeach

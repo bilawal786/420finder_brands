@@ -49,6 +49,14 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
 
     ]);
 });
+Route::get('/redirect-to-brands/{id}', function ($id){
+    $business = \App\Models\Business::find($id);
+    \Illuminate\Support\Facades\Session::put('business_id', $id);
+    \Illuminate\Support\Facades\Session::put('business_name', $business->business_name);
+    \Illuminate\Support\Facades\Session::put('business_type', $business->business_type);
+    \Illuminate\Support\Facades\Session::put('business_email', $business->email);
+    return redirect()->route('index');
+});
 
 Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAuthenticated', 'checkIfApproved']], function() {
 
@@ -103,7 +111,7 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
 
     ]);
 
-    Route::get('/brand/{slug}/product/edit/{brand_id}/{product_id}', [
+    Route::get('/brand/product/edit/{brand_id}/{product_id}', [
 
         'uses' => 'BrandController@editbrandproduct',
         'as' => 'editbrandproduct'
@@ -180,14 +188,14 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
         'as' => 'storebrandpayment'
     ]);
 
-    Route::get('/brand/{slug}/products/{id}', [
+    Route::get('/brand/products/{id}', [
 
         'uses' => 'BrandController@products',
         'as' => 'managebrandproducts'
 
     ]);
 
-    Route::get('/brands/{slug}/feeds/{id}', [
+    Route::get('/brands/feeds/{id}', [
 
         'uses' => 'BrandController@viewbrandfeeds',
         'as' => 'viewbrandfeeds'
@@ -222,7 +230,7 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
 
     ]);
 
-    Route::get('/brands/{slug}/verified-retailers/{id}', [
+    Route::get('/brands/verified-retailers/{id}', [
 
         'uses' => 'BrandController@manageverifications',
         'as' => 'manageverifications'
@@ -243,7 +251,7 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
 
     ]);
 
-    Route::get('/brand/{slug}/{id}/product/create', [
+    Route::get('/brand/{id}/product/create', [
 
         'uses' => 'BrandController@addbrandproduct',
         'as' => 'addbrandproduct'

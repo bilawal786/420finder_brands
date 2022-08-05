@@ -41,9 +41,9 @@ use App\Models\DispenseryProductGallery;
 class BrandController extends Controller {
 
     public function index() {
-
-        $brands = Brand::where('business_id', session('business_id'))
-            ->get();
+        $brands = Business::where('email', session('business_email'))->where('business_type', 'Brand')->get();
+//        $brands = Brand::where('business_id', session('business_id'))
+//            ->get();
 
         return view('business.brands.index')
             ->with('brands', $brands);
@@ -73,61 +73,49 @@ class BrandController extends Controller {
             'logo' => 'required|image',
             'cover' => 'required|image'
         ]);
-
-        $brand = new Brand;
-
-        $brand->business_id = session('business_id');
-        $brand->name = $request->name;
-        $brand->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->name)));
-        $brand->description = $request->description;
-
+        $myBusiness = Business::where('id', session('business_id'))->first();
+        $brand = new Business();
+        $brand->business_name = $request->name;
+        $brand->introduction = $request->description;
+        $brand->email = $myBusiness->email;
+        $brand->phone_number = $myBusiness->phone_number;
+        $brand->business_type = "Brand";
         if($request->hasFile('logo')) {
-
             $avatar = $request->file('logo');
             $filename = time() . '.' . $avatar->GetClientOriginalExtension();
-
             $avatar_img = Image::make($avatar);
             $avatar_img->resize(256,250)->save(public_path('images/brands/logo/' . $filename));
-
-            $brand->logo = asset("images/brands/logo/" . $filename);
-
+            $brand->profile_picture = asset("images/brands/logo/" . $filename);
         }
-
         if($request->hasFile('cover')) {
-
             $avatar = $request->file('cover');
             $filename = time() . '.' . $avatar->GetClientOriginalExtension();
-
             $avatar_img = Image::make($avatar);
             $avatar_img->resize(770,218)->save(public_path('images/brands/cover/' . $filename));
-
             $brand->cover = asset("images/brands/cover/" . $filename);
-
         }
-
         $brand->license_type = $request->license_type;
         $brand->license_number = $request->license_number;
         $brand->yt_featured_url = $request->yt_featured_url;
         $brand->yt_playlist_url = $request->yt_playlist_url;
-        $brand->website_url = $request->website_url;
-        $brand->instagram_url = $request->instagram_url;
-        $brand->twitter_url = $request->twitter_url;
-        $brand->facebook_url = $request->facebook_url;
+        $brand->website = $request->website_url;
+        $brand->instagram = $request->instagram_url;
+        $brand->twitter = $request->twitter_url;
+        $brand->facebook = $request->facebook_url;
         $brand->status = $request->status;
-
+        $brand->approve = "0";
         $brand->save();
-
         return redirect()->back()->with('info', 'Brand Created.');
 
     }
 
     public function edit($id) {
 
-        if(is_null($this->checkIfUserBrand($id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($id))) {
+//            return redirect()->back();
+//        }
 
-        $brand = Brand::where('id', $id)->first();
+        $brand = Business::where('id', $id)->first();
 
         return view('business.brands.edit')
             ->with('brand', $brand);
@@ -151,61 +139,43 @@ class BrandController extends Controller {
             'status' => 'required'
         ]);
 
-        if(is_null($this->checkIfUserBrand($request->brand_id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($request->brand_id))) {
+//            return redirect()->back();
+//        }
 
 
-        $brand = Brand::find($request->brand_id);
-
-        $brand->business_id = session('business_id');
-        $brand->name = $request->name;
-        $brand->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->name)));
-        $brand->description = $request->description;
-
+        $brand = Business::find($request->brand_id);
+        $brand->business_name = $request->name;
+        $brand->introduction = $request->description;
         $brandLogo = NULL;
         $brandCover = NULL;
-
         if($request->hasFile('logo')) {
-
             $avatar = $request->file('logo');
             $filename = time() . '.' . $avatar->GetClientOriginalExtension();
-
             $avatar_img = Image::make($avatar);
             $avatar_img->resize(256,250)->save(public_path('images/brands/logo/' . $filename));
-
             $brandLogo = $brand->logo;
-
-            $brand->logo = asset("images/brands/logo/" . $filename);
+            $brand->profile_picture = asset("images/brands/logo/" . $filename);
 
         }
-
         if($request->hasFile('cover')) {
-
             $avatar = $request->file('cover');
             $filename = time() . '.' . $avatar->GetClientOriginalExtension();
-
             $avatar_img = Image::make($avatar);
             $avatar_img->resize(770,218)->save(public_path('images/brands/cover/' . $filename));
-
             $brandCover = $brand->cover;
-
             $brand->cover = asset("images/brands/cover/" . $filename);
-
         }
-
         $brand->license_type = $request->license_type;
         $brand->license_number = $request->license_number;
         $brand->yt_featured_url = $request->yt_featured_url;
         $brand->yt_playlist_url = $request->yt_playlist_url;
-        $brand->website_url = $request->website_url;
-        $brand->instagram_url = $request->instagram_url;
-        $brand->twitter_url = $request->twitter_url;
-        $brand->facebook_url = $request->facebook_url;
+        $brand->website = $request->website_url;
+        $brand->instagram = $request->instagram_url;
+        $brand->twitter = $request->twitter_url;
+        $brand->facebook = $request->facebook_url;
         $brand->status = $request->status;
-
         $saved = $brand->save();
-
         if($saved) {
             if(!is_null($brandLogo)) {
                 $exp = explode('/', $brandLogo);
@@ -232,13 +202,13 @@ class BrandController extends Controller {
 
     public function view($id) {
 
-        if(is_null($this->checkIfUserBrand($id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($id))) {
+//            return redirect()->back();
+//        }
 
         $business = Business::where('id', session('business_id'))->first();
 
-        $brand = Brand::where('id', $id)->select('id', 'name', 'slug', 'is_paid')->first();
+        $brand =  Business::where('id', $id)->first();
 
         $active = "contact-details";
 
@@ -249,13 +219,13 @@ class BrandController extends Controller {
 
     }
 
-    public function products($slug, $id) {
+    public function products($id) {
 
-        if(is_null($this->checkIfUserBrand($id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($id))) {
+//            return redirect()->back();
+//        }
 
-        $brand = Brand::where('id', $id)->select('id', 'name', 'slug', 'is_paid')->first();
+        $brand =  Business::where('id', $id)->first();
 
         $active = "product-management";
 
@@ -286,12 +256,11 @@ class BrandController extends Controller {
             'description' => 'required',
             'sku' => 'required',
             'suggested_price' => 'required',
-            'is_featured' => 'required'
         ]);
 
-        if(is_null($this->checkIfUserBrand($request->brand_id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($request->brand_id))) {
+//            return redirect()->back();
+//        }
 
         $product = new BrandProduct;
 
@@ -409,14 +378,14 @@ class BrandController extends Controller {
 
     }
 
-    public function editbrandproduct($slug, $brand_id, $product_id) {
+    public function editbrandproduct($brand_id, $product_id) {
 
 
-        if(is_null($this->checkIfUserBrand($brand_id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($brand_id))) {
+//            return redirect()->back();
+//        }
 
-        $brand = Brand::where('id', $brand_id)->select('id', 'name', 'slug', 'is_paid')->first();
+        $brand = Business::where('id', $brand_id)->first();
 
         $active = "product-management";
 
@@ -482,13 +451,12 @@ class BrandController extends Controller {
             'description' => 'required',
             'sku' => 'required',
             'suggested_price' => 'required',
-            'is_featured' => 'required',
             'status' => 'required'
         ]);
 
-        if(is_null($this->checkIfUserBrand($request->brand_id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($request->brand_id))) {
+//            return redirect()->back();
+//        }
 
         $product = BrandProduct::find($request->product_id);
 
@@ -778,13 +746,13 @@ class BrandController extends Controller {
 
     }
 
-    public function viewbrandfeeds($slug, $id) {
+    public function viewbrandfeeds($id) {
 
-        if(is_null($this->checkIfUserBrand($id))) {
-            return redirect()->route('index');
-        }
+//        if(is_null($this->checkIfUserBrand($id))) {
+//            return redirect()->route('index');
+//        }
 
-        $brand = Brand::where('id', $id)->select('id', 'name', 'slug', 'is_paid')->first();
+        $brand = Business::where('id', $id)->first();
 
         $active = "feeds";
 
@@ -807,9 +775,9 @@ class BrandController extends Controller {
             'image' => 'required|image'
         ]);
 
-        if(is_null($this->checkIfUserBrand($request->brand_id))) {
-            return redirect()->back();
-        }
+//        if(is_null($this->checkIfUserBrand($request->brand_id))) {
+//            return redirect()->back();
+//        }
 
         $feed = new BrandFeed;
 
@@ -936,13 +904,13 @@ class BrandController extends Controller {
 
     }
 
-    public function manageverifications($slug, $id) {
+    public function manageverifications( $id) {
 
-        if(is_null($this->checkIfUserBrand($id))) {
-            return redirect()->route('index');
-        }
+//        if(is_null($this->checkIfUserBrand($id))) {
+//            return redirect()->route('index');
+//        }
 
-        $brand = Brand::where('id', $id)->select('id', 'name', 'slug', 'is_paid')->first();
+        $brand = Business::where('id', $id)->first();
 
         $requests = ProductRequest::where('brand_id', $id)->get();
 
@@ -1096,9 +1064,9 @@ class BrandController extends Controller {
 
     }
 
-    public function addbrandproduct($slug, $id) {
+    public function addbrandproduct($id) {
 
-        $brand = Brand::where('id', $id)->select('id', 'name', 'slug', 'is_paid')->first();
+        $brand =  Business::where('id', $id)->first();
 
         $active = "product-management";
 

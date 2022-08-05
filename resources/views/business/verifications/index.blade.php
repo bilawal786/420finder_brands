@@ -14,7 +14,7 @@
                   </div>
                 </div>
 
-                @if($brand->is_paid)
+                @if(!$brand->is_paid)
                 <div class="card">
                   <div class="card-body">
                     <div class="table responsive">

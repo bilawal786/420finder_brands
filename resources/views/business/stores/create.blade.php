@@ -12,10 +12,10 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6">
-                        <h4>Create Stores</h4>
+                        <h4>Create New Business</h4>
                       </div>
                       <div class="col-md-6 text-end">
-                        <a href="{{ route('stores') }}" class="appointment-btn" style="margin-left: 0px !important;">Back to stores</a>
+                        <a href="{{ route('stores') }}" class="appointment-btn" style="margin-left: 0px !important;">Back to Businesses</a>
                       </div>
                     </div>
                   </div>
@@ -407,7 +407,7 @@
                           </label>
                         </div>
                         <div class="form-group">
-                          <button type="submit" class="btn appointment-btn" style="margin-left: 0;">Create Store</button>
+                          <button type="submit" class="btn appointment-btn" style="margin-left: 0;">Create Business</button>
                         </div>
                       </div>
                     </form>

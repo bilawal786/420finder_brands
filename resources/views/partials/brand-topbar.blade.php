@@ -26,24 +26,24 @@
           <a href="{{ route('viewprofilebrand', ['id' => $brand->id]) }}">CONTACT DETAILS</a>
         </h6>
       </li>
-      <li class="me-4 {{ $payments }}">
-        <h6 style="font-size: 1.1rem">
-          <a href="{{ route('managebrandpayments', [$brand->slug, $brand->id]) }}">Payments</a>
-        </h6>
-      </li>
+{{--      <li class="me-4 {{ $payments }}">--}}
+{{--        <h6 style="font-size: 1.1rem">--}}
+{{--          <a href="{{ route('managebrandpayments', [$brand->slug, $brand->id]) }}">Payments</a>--}}
+{{--        </h6>--}}
+{{--      </li>--}}
       <li class="me-4 {{ $productmanagement }}">
         <h6>
-          <a href="{{ route('managebrandproducts', ['slug' => $brand->slug, 'id' => $brand->id]) }}">PRODUCT MANAGEMENT</a>
+          <a href="{{ route('managebrandproducts', ['id' => $brand->id]) }}">PRODUCT MANAGEMENT</a>
         </h6>
       </li>
       <li class="me-4 {{ $manageverifications }}">
         <h6>
-          <a href="{{ route('manageverifications', ['slug' => $brand->slug, 'id' => $brand->id]) }}">MANAGE VERIFICATIONS</a>
+          <a href="{{ route('manageverifications', [ 'id' => $brand->id]) }}">MANAGE VERIFICATIONS</a>
         </h6>
       </li>
       <li class="me-4 {{ $feeds }}">
         <h6>
-          <a href="{{ route('viewbrandfeeds', ['slug' => $brand->slug, 'id' => $brand->id]) }}">FEED</a>
+          <a href="{{ route('viewbrandfeeds', ['id' => $brand->id]) }}">FEED</a>
         </h6>
       </li>
     </ul>

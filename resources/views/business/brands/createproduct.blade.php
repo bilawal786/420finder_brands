@@ -13,7 +13,7 @@
                   </div>
                 </div>
 
-                @if ($brand->is_paid)
+                @if (!$brand->is_paid)
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <nav aria-label="breadcrumb" class="pt-2">

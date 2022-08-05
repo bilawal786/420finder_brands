@@ -2413,6 +2413,7 @@ public function addtocartdelivery(Request $request) {
 
       $business->role = $request->role;
       $business->business_name = $request->business_name;
+      $business->email = session('business_email');
       $business->business_type = $request->business_type;
       $business->country = $request->country;
       $business->address_line_1 = $request->address_line_1;
@@ -2428,26 +2429,27 @@ public function addtocartdelivery(Request $request) {
 
       if ($business->save()) {
 
-        $checkEmail = User::where('email', $request->email)->count();
-
-        if ($checkEmail > 0) {
-          return redirect()->back()->with('error', 'Email already exists.');
-        } else {
-
-          $user = new User;
-
-          $user->name = $request->first_name . ' ' . $request->last_name;
-
-          $user->email = $request->email;
-
-          $user->password = Hash::make($request->password);
-
-          $user->save();
+//        $checkEmail = User::where('email', $request->email)->count();
+//
+//        if ($checkEmail > 0) {
+//          return redirect()->back()->with('error', 'Email already exists.');
+//        } else {
+//
+//          $user = new User;
+//
+//          $user->name = $request->first_name . ' ' . $request->last_name;
+//
+//          $user->email = session('business_email');
+//
+//          $user->password = Hash::make($request->password);
+//
+//          $user->save();
+//
+//          return redirect()->back()->with('info', 'Your store has been created.');
+//
+//        }
 
           return redirect()->back()->with('info', 'Your store has been created.');
-
-        }
-
       } else {
 
           return redirect()->back()->with('error', 'Problem saving your business details.');
