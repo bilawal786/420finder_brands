@@ -83,7 +83,7 @@
                           <div class="col-md-6 col-6">
                             <div class="form-group pb-3">
                               <label for="">Country*</label>
-                              <select name="country" class="form-control" required="">
+                              <select name="country" onchange="myFunction(this)" class="form-control" required="">
                                 <option value="" selected="selected">Select a country</option>
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
@@ -327,6 +327,25 @@
                               </select>
                             </div>
                           </div>
+                            <div class="col-md-6 col-6"  id="displayData" style="display: none">
+                                <div class="form-group pb-3">
+                                    <label for="">State / Province</label>
+                                    <select name="state_province"  class="form-control"
+                                            style="margin-bottom: 1.2rem;" required>
+                                        <option value="">Select State</option>
+                                        @foreach ($state as $row)
+                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6" id="displayData2" style="display: none">
+                                <div class="form-group pb-3">
+                                    <label for="">State / Province</label>
+                                    <input type="text" name="state_province" class="form-control" required="">
+                                </div>
+                            </div>
+
                           <div class="col-md-12 col-12">
                             <div class="form-group pb-3">
                               <label for="">Address Line 1</label>
@@ -345,12 +364,7 @@
                               <input type="text" name="city" class="form-control" required="">
                             </div>
                           </div>
-                          <div class="col-md-6 col-6">
-                            <div class="form-group pb-3">
-                              <label for="">State / Province</label>
-                              <input type="text" name="state_province" class="form-control" required="">
-                            </div>
-                          </div>
+
                           <div class="col-md-6 col-6">
                             <div class="form-group pb-3">
                               <label for="">Postal code</label>
@@ -392,6 +406,7 @@
                               </select>
                             </div>
                           </div>
+
                           <div class="col-md-6 col-6">
                             <div class="form-group pb-3">
                               <label for="">Expiration</label>
@@ -416,6 +431,26 @@
               </div>
           </div>
         </div>
+
     </section>
+    <script>
+    function myFunction(selectObject){
+        var value = selectObject.value;
+        console.log(value);
+        var x = document.getElementById("displayData");
+        var y = document.getElementById("displayData2");
+        if(value=='United States'){
+
+            x.style.display = 'block';
+            y.style.display = 'none';
+        }else{
+            x.style.display = 'none';
+            y.style.display = 'block';
+        }
+    }
+    </script>
+    @endsection
+    @section('scripts')
+
 
 @endsection
