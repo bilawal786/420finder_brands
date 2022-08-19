@@ -122,6 +122,22 @@
                     </div>
 
                   </div>
+                    <div class="col-md-6">
+
+                        <div class="card p-3 mt-3 shadow-sm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6><strong>State / Province</strong></h6>
+                                    <?php $state = \Illuminate\Support\Facades\DB::table('states')->where('id','=',$business->state_province)->first(); ?>
+                                    <p class="text-black-50">{{ $state->name }}</p>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <a data-bs-toggle="modal" data-bs-target="#addressline10" class="cursor-pointer">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                   <div class="col-md-6">
 
                     <div class="card p-3 mt-3 shadow-sm">
@@ -350,6 +366,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
             </div>
+
           <div class="row my-3">
             <div class="col-md-12">
                 <div class="form-group">
@@ -366,10 +383,53 @@
           </div>
         </form>
       </div>
+
     </div>
   </div>
 
-  <!-- Address Line 1 -->
+    <!-- Address Line 1 -->
+    <div class="modal fade" id="addressline10" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('updateState') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><strong>Update Address Line 1</strong></h6>
+                            </div>
+                            <div class="col-md-6 text-end pt-2 pe-3">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Address Line 1</label>
+                                    <select name="state_province"  class="form-control"
+                                            style="margin-bottom: 1.2rem;" required>
+                                        <option value="">Select State</option>
+                                        @foreach ($statee as $row)
+
+                                            <option value="{{ $row->id }}" {{ ($row->id == $business->state_province) ? 'selected' : '' }}>{{ $row->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button  type="submit" class="appointment-btn w-100 border-0" style="margin-left: 0px;"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Address Line 1 -->
   <div class="modal fade" id="addressline1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
