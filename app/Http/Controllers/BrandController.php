@@ -963,6 +963,7 @@ class BrandController extends Controller {
                 $dproduct->thc_percentage       = $brandproduct->thc_percentage;
                 $dproduct->cbd_percentage       = $brandproduct->cbd_percentage;
                 $dproduct->is_featured          = $brandproduct->is_featured;
+                $dproduct->verify       = 1;
 
                 $dproduct->save();
 
@@ -1005,6 +1006,7 @@ class BrandController extends Controller {
                 $dproduct->thc_percentage       = $brandproduct->thc_percentage;
                 $dproduct->cbd_percentage       = $brandproduct->cbd_percentage;
                 $dproduct->is_featured          = $brandproduct->is_featured;
+                $dproduct->verify       = 1;
 
                 $dproduct->save();
 
