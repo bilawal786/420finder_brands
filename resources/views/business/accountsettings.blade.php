@@ -129,7 +129,7 @@
                                 <div class="col-md-6">
                                     <h6><strong>State / Province</strong></h6>
                                     <?php $state = \Illuminate\Support\Facades\DB::table('states')->where('id','=',$business->state_province)->first(); ?>
-                                    <p class="text-black-50">{{ $state->name }}</p>
+                                    <p class="text-black-50">{{ $state->name ?? '' }}</p>
                                 </div>
                                 <div class="col-md-6 text-end">
                                     <a data-bs-toggle="modal" data-bs-target="#addressline10" class="cursor-pointer">Edit</a>
