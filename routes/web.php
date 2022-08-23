@@ -306,6 +306,12 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
         'as' => 'updateaddresslineone'
 
     ]);
+    Route::post('/updateState', [
+
+        'uses' => 'BusinessController@updateState',
+        'as' => 'updateState'
+
+    ]);
 
     Route::post('/updateaddresslinetwo', [
 

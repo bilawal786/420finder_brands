@@ -2854,8 +2854,8 @@ public function addtocartdelivery(Request $request) {
 
 
   public function addnewstore() {
-
-    return view('business.stores.create');
+      $state = \Illuminate\Support\Facades\DB::table('states')->get();
+    return view('business.stores.create',compact('state'));
 
   }
 

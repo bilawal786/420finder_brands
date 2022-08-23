@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-
-use App\Models\User;
-
 use App\Models\Brand;
-
-use App\Models\Order;
-
-use App\Models\Business;
-
 use App\Models\BrandFeed;
-
 use App\Models\BrandProduct;
-use Illuminate\Http\Request;
 use App\Models\BrandProductReview;
-use Illuminate\Support\Facades\Session;
+use App\Models\Business;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use Carbon\Carbon;
+use Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
-class BusinessController extends Controller {
+class BusinessController extends Controller
+{
 
     // public function businesssignin() {
 
@@ -28,7 +23,8 @@ class BusinessController extends Controller {
 
     // }
 
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+    {
 
         if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             return back()->with('error', 'Please enter a valid email format.')->withInput();
@@ -45,14 +41,14 @@ class BusinessController extends Controller {
 
                 } elseif ($check['status'] == 1) {
 
-                    if (\Hash::check($request->password, $check->password)) {
+                    if (Hash::check($request->password, $check->password)) {
 
                         $business_id = $request->session()->put('business_id', $check->id);
                         $business_fn = $request->session()->put('business_fn', $check->first_name);
                         $business_ln = $request->session()->put('business_ln', $check->last_name);
                         $business_email = $request->session()->put('business_email', $check->email);
 
-                        if(Session::has("prevUrl") && Session::get('prevUrl') != 'business-logout') {
+                        if (Session::has("prevUrl") && Session::get('prevUrl') != 'business-logout') {
 
                             return redirect()->to(Session::get('prevUrl'));
                         } else {
@@ -77,7 +73,8 @@ class BusinessController extends Controller {
 
     }
 
-    public function businessprofile() {
+    public function businessprofile()
+    {
 
         $totalbrands = Brand::where('business_id', session('business_id'))->count();
         $publishedbrands = Brand::where('business_id', session('business_id'))->where('status', 1)->count();
@@ -111,7 +108,7 @@ class BusinessController extends Controller {
             $products[$month] = 0;
         }
 
-        foreach($brandids as $brand) {
+        foreach ($brandids as $brand) {
 
             for ($month = 1; $month <= date('m'); $month++) {
                 $date = Carbon::create(date('Y'), $month);
@@ -122,22 +119,22 @@ class BusinessController extends Controller {
                     ->where('created_at', '<=', $date_end)
                     ->count();
                 $currentProduct = $products[$month];
-                $currentProduct += (int) $product;
+                $currentProduct += (int)$product;
                 $products[$month] = $currentProduct;
             }
         }
 
         $chart = (new LarapexChart)->lineChart()
-                   ->setTitle('Products')
-                   ->setSubtitle('Total products added this year')
-                   ->addData('Products', array_values($products))
-                   ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+            ->setTitle('Products')
+            ->setSubtitle('Total products added this year')
+            ->addData('Products', array_values($products))
+            ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
 
         $pieChart = (new LarapexChart)->pieChart()
-        ->setTitle('Statistics')
-        ->setSubtitle('Year 2022')
-        ->addData([$totalbrands, $totalproducts, $totalfeeds])
-        ->setLabels(['Brands', 'Products', 'Feeds']);
+            ->setTitle('Statistics')
+            ->setSubtitle('Year 2022')
+            ->addData([$totalbrands, $totalproducts, $totalfeeds])
+            ->setLabels(['Brands', 'Products', 'Feeds']);
 
         return view('business.index')
             ->with('totalbrands', $totalbrands)
@@ -151,16 +148,18 @@ class BusinessController extends Controller {
 
     }
 
-    public function businessaccountsettings() {
+    public function businessaccountsettings()
+    {
 
         $business = Business::where('id', session('business_id'))->first();
+        $statee = DB::table('states')->get();
 
-        return view('business.accountsettings')
-            ->with('business', $business);
+        return view('business.accountsettings', compact('business', 'statee'));
 
     }
 
-    public function updatefirstname(Request $request) {
+    public function updatefirstname(Request $request)
+    {
 
         $business = Business::find(session('business_id'));
 
@@ -168,13 +167,13 @@ class BusinessController extends Controller {
 
         if ($business->save()) {
 
-            $response = ['statuscode'=> 200, 'message'=> 'First Name Updated.'];
+            $response = ['statuscode' => 200, 'message' => 'First Name Updated.'];
 
             echo json_encode($response);
 
         } else {
 
-            $response = ['statuscode'=> 400, 'message'=> 'Problem saving first name.'];
+            $response = ['statuscode' => 400, 'message' => 'Problem saving first name.'];
 
             echo json_encode($response);
 
@@ -182,7 +181,8 @@ class BusinessController extends Controller {
 
     }
 
-    public function updatelastname(Request $request) {
+    public function updatelastname(Request $request)
+    {
 
         $business = Business::find(session('business_id'));
 
@@ -190,13 +190,13 @@ class BusinessController extends Controller {
 
         if ($business->save()) {
 
-            $response = ['statuscode'=> 200, 'message'=> 'Last Name Updated.'];
+            $response = ['statuscode' => 200, 'message' => 'Last Name Updated.'];
 
             echo json_encode($response);
 
         } else {
 
-            $response = ['statuscode'=> 400, 'message'=> 'Problem saving last name.'];
+            $response = ['statuscode' => 400, 'message' => 'Problem saving last name.'];
 
             echo json_encode($response);
 
@@ -204,7 +204,8 @@ class BusinessController extends Controller {
 
     }
 
-    public function updatephonenumber(Request $request) {
+    public function updatephonenumber(Request $request)
+    {
 
         $business = Business::find(session('business_id'));
 
@@ -212,13 +213,13 @@ class BusinessController extends Controller {
 
         if ($business->save()) {
 
-            $response = ['statuscode'=> 200, 'message'=> 'Phone Number Updated.'];
+            $response = ['statuscode' => 200, 'message' => 'Phone Number Updated.'];
 
             echo json_encode($response);
 
         } else {
 
-            $response = ['statuscode'=> 400, 'message'=> 'Problem saving phone number.'];
+            $response = ['statuscode' => 400, 'message' => 'Problem saving phone number.'];
 
             echo json_encode($response);
 
@@ -226,7 +227,8 @@ class BusinessController extends Controller {
 
     }
 
-    public function updatebusinessname(Request $request) {
+    public function updatebusinessname(Request $request)
+    {
 
         $business = Business::find(session('business_id'));
 
@@ -234,13 +236,13 @@ class BusinessController extends Controller {
 
         if ($business->save()) {
 
-            $response = ['statuscode'=> 200, 'message'=> 'Business Name Updated.'];
+            $response = ['statuscode' => 200, 'message' => 'Business Name Updated.'];
 
             echo json_encode($response);
 
         } else {
 
-            $response = ['statuscode'=> 400, 'message'=> 'Problem saving business name.'];
+            $response = ['statuscode' => 400, 'message' => 'Problem saving business name.'];
 
             echo json_encode($response);
 
@@ -248,7 +250,8 @@ class BusinessController extends Controller {
 
     }
 
-    public function updateaddresslineone(Request $request) {
+    public function updateaddresslineone(Request $request)
+    {
 
         $business = Business::find(session('business_id'));
 
@@ -256,13 +259,13 @@ class BusinessController extends Controller {
 
         if ($business->save()) {
 
-            $response = ['statuscode'=> 200, 'message'=> 'Address Line 1 Updated.'];
+            $response = ['statuscode' => 200, 'message' => 'Address Line 1 Updated.'];
 
             echo json_encode($response);
 
         } else {
 
-            $response = ['statuscode'=> 400, 'message'=> 'Problem saving address line 1.'];
+            $response = ['statuscode' => 400, 'message' => 'Problem saving address line 1.'];
 
             echo json_encode($response);
 
@@ -270,7 +273,18 @@ class BusinessController extends Controller {
 
     }
 
-    public function updateaddresslinetwo(Request $request) {
+    public function updateState(Request $request)
+    {
+
+        $business = Business::find(session('business_id'));
+        $business->state_province = $request->state_province;
+        $business->update();
+        return redirect()->back()->with('info', 'State Update.');
+
+    }
+
+    public function updateaddresslinetwo(Request $request)
+    {
 
         $business = Business::find(session('business_id'));
 
@@ -278,13 +292,13 @@ class BusinessController extends Controller {
 
         if ($business->save()) {
 
-            $response = ['statuscode'=> 200, 'message'=> 'Address Line 2 Updated.'];
+            $response = ['statuscode' => 200, 'message' => 'Address Line 2 Updated.'];
 
             echo json_encode($response);
 
         } else {
 
-            $response = ['statuscode'=> 400, 'message'=> 'Problem saving address line 2.'];
+            $response = ['statuscode' => 400, 'message' => 'Problem saving address line 2.'];
 
             echo json_encode($response);
 
@@ -292,7 +306,8 @@ class BusinessController extends Controller {
 
     }
 
-    public function updatewebsite(Request $request) {
+    public function updatewebsite(Request $request)
+    {
 
         $business = Business::find(session('business_id'));
 
@@ -300,13 +315,13 @@ class BusinessController extends Controller {
 
         if ($business->save()) {
 
-            $response = ['statuscode'=> 200, 'message'=> 'Website URL Updated.'];
+            $response = ['statuscode' => 200, 'message' => 'Website URL Updated.'];
 
             echo json_encode($response);
 
         } else {
 
-            $response = ['statuscode'=> 400, 'message'=> 'Problem saving website url.'];
+            $response = ['statuscode' => 400, 'message' => 'Problem saving website url.'];
 
             echo json_encode($response);
 
@@ -314,7 +329,8 @@ class BusinessController extends Controller {
 
     }
 
-    public function businesslogout() {
+    public function businesslogout()
+    {
 
         session()->forget('business_id');
         session()->forget('business_fn');
