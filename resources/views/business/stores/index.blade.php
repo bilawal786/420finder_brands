@@ -88,7 +88,7 @@
                                                             <a href="http://127.0.0.1:8003/redirect-to-dispansary/{{ $store->id }}"
                                                                class="appointment-btn" target="_blank">Manage</a>
                                                         @else
-                                                            <a href="https://dispensaries.420finder.net"
+                                                            <a href="https://dispensaries.420finder.net/redirect-to-dispansary/{{ $store->id }}"
                                                                class="appointment-btn" target="_blank">Manage</a>
                                                         @endif
                                                     @elseif ($store->business_type == 'Brand')
@@ -101,7 +101,7 @@
                                                             <a href="http://127.0.0.1:8004/redirect-to-delivery/{{ $store->id }}"
                                                                class="appointment-btn" target="_blank">Manage</a>
                                                         @else
-                                                            <a href="https://deliveries.420finder.net"
+                                                            <a href="https://deliveries.420finder.net/redirect-to-delivery/{{ $store->id }}"
                                                                class="appointment-btn" target="_blank">Manage</a>
                                                         @endif
                                                     @endif
