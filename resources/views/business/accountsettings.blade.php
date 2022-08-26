@@ -396,7 +396,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <h6><strong>Update Address Line 1</strong></h6>
+                                <h6><strong>Update State / Province</strong></h6>
                             </div>
                             <div class="col-md-6 text-end pt-2 pe-3">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -405,7 +405,7 @@
                         <div class="row my-3">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Address Line 1</label>
+                                    <label for="">State / Province</label>
                                     <select name="state_province"  class="form-control"
                                             style="margin-bottom: 1.2rem;" required>
                                         <option value="">Select State</option>
