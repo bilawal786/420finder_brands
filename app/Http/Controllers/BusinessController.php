@@ -75,10 +75,13 @@ class BusinessController extends Controller
 
     public function businessprofile()
     {
+        $totalbrands = Business::where('email', session('business_email'))->where('business_type', 'Brand')->count();
 
-        $totalbrands = Brand::where('business_id', session('business_id'))->count();
-        $publishedbrands = Brand::where('business_id', session('business_id'))->where('status', 1)->count();
-        $unpublishedbrands = Brand::where('business_id', session('business_id'))->where('status', 0)->count();
+//        $totalbrands = Brand::where('business_id', session('business_id'))->count();
+        $publishedbrands = Business::where('email', session('business_email'))->where('business_type', 'Brand')->where('status', 1)->count();
+        $unpublishedbrands = Business::where('email', session('business_email'))->where('business_type', 'Brand')->where('status', 0)->count();
+        $totalDelivery = Business::where('email', session('business_email'))->where('business_type', '=', 'Delivery')->count();
+        $totalDispensary = Business::where('email', session('business_email'))->where('business_type', '=', 'Dispensary')->count();
         $totalfeeds = BrandFeed::where('business_id', session('business_id'))->count();
 
         $brandids = Brand::where('business_id', session('business_id'))->select('id')->get();
@@ -140,6 +143,8 @@ class BusinessController extends Controller
             ->with('totalbrands', $totalbrands)
             ->with('publishedbrands', $publishedbrands)
             ->with('unpublishedbrands', $unpublishedbrands)
+            ->with('totalDelivery', $totalDelivery)
+            ->with('totalDispensary', $totalDispensary)
             ->with('totalfeeds', $totalfeeds)
             ->with('totalproducts', $totalproducts)
             ->with('chart', $chart)

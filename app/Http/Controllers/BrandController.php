@@ -52,7 +52,9 @@ class BrandController extends Controller {
 
     public function create() {
 
-        return view('business.brands.create');
+        $state = \Illuminate\Support\Facades\DB::table('states')->get();
+
+        return view('business.brands.create', compact('state'));
 
     }
 
@@ -73,6 +75,7 @@ class BrandController extends Controller {
             'logo' => 'required|image',
             'cover' => 'required|image'
         ]);
+
         $myBusiness = Business::where('id', session('business_id'))->first();
         $brand = new Business();
         $brand->business_name = $request->name;
@@ -80,6 +83,15 @@ class BrandController extends Controller {
         $brand->email = $myBusiness->email;
         $brand->phone_number = $myBusiness->phone_number;
         $brand->business_type = "Brand";
+        $brand->address_line_1 = $request->address_line_1;
+        $brand->address_line_2 = $request->address_line_2;
+        $brand->city = $request->city;
+        $brand->state_province = $request->state_province;
+        $brand->country = 'United States';
+        $brand->postal_code = $request->postal_code;
+        $brand->license_expiration = $request->license_expiration;
+
+
         if($request->hasFile('logo')) {
             $avatar = $request->file('logo');
             $filename = time() . '.' . $avatar->GetClientOriginalExtension();

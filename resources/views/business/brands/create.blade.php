@@ -48,10 +48,59 @@
                             <label for="">Name</label>
                             <input type="text" name="name" class="form-control" required="">
                           </div>
-                          <div class="form-group">
+                          <div class="form-group pb-4">
                             <label for="">Description</label>
                             <textarea id="editor1" name="description" cols="5" rows="5" class="form-control" required=""></textarea>
                           </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="form-group pb-4">
+                                        <label for="">Address Line 1</label>
+                                        <input type="text" name="address_line_1" class="form-control" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-4">
+                                        <label for="">Address Line 2</label>
+                                        <input type="text" name="address_line_2" class="form-control" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-4">
+                                        <label for="">City</label>
+                                        <input type="text" name="city" class="form-control" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-4">
+                                        <label for="">State / Province</label>
+                                        <select required name="state_province" id="state_province" class="form-control"
+                                                style="margin-bottom: 1.2rem;" >
+                                            <option value="">Select State</option>
+                                            @foreach ($state as $row)
+                                                <option value="{{ $row->id }}" > {{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-4">
+                                        <label for="">Country</label>
+                                        <input type="text" name="country" class="form-control" value="United States" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-4">
+                                        <label for="">Postal code</label>
+                                        <input type="text" name="postal_code" class="form-control" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <h4><strong>License</strong></h4>
+                                </div>
+                            </div>
                           <div class="row mt-4">
                             <div class="col-md-6">
                               <div class="form-group">
@@ -79,6 +128,12 @@
                                 <input type="text" name="license_number" class="form-control" required="">
                               </div>
                             </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="">Expiration</label>
+                                      <input type="date" name="license_expiration" class="form-control" required="">
+                                  </div>
+                              </div>
                           </div>
                           <div class="row mt-4">
                             <div class="col-md-12">

@@ -4,7 +4,7 @@
 
     @section('content')
        <div class="dash-analytics">
-            <h4>Dashboard</h4>
+            <h4>Master Dashboard</h4>
 
                 <p class="text-black-50">Today's Analytics</p>
                 <div class="row mt-4">
@@ -49,38 +49,37 @@
                       </div>
                       <div class="col-sm-6 col-md-3 mb-3">
                         <div class="card business-card">
-                          <h5>Total feeds</h5>
+                          <h5>Total Delivery</h5>
                           <div class="card-content">
-                            <p class="mb-0">{{ $totalfeeds }}</p>
+                            <p class="mb-0">{{ $totalDelivery }}</p>
                             <div class="card-icon card-icon-purple">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1zm-1-2V4H5v16h14zM7 6h4v4H7V6zm0 6h10v2H7v-2zm0 4h10v2H7v-2zm6-9h4v2h-4V7z"/></svg>
                               </div>
                           </div>
-
                         </div>
                       </div>
                       <div class="col-sm-6 col-md-3 mb-3">
                         <div class="card business-card">
-                            <h5>Total products</h5>
+                            <h5>Total Dispensary</h5>
                           <div class="card-content">
-                              <p class="mb-0">{{ $totalproducts }}</p>
+                              <p class="mb-0">{{ $totalDispensary }}</p>
                               <div class="card-icon card-icon-orange">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M8 1v4H4v14h16V3h1.008c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993A1 1 0 0 1 2.992 3H6V1h2zm4 7l4 4h-3v4h-2v-4H8l4-4zm6-7v4h-8V3h6V1h2z"/></svg>
                               </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-6 col-md-3 mb-3">
-                        <div class="card business-card">
-                          <h5>Total product reviews</h5>
-                          <div class="card-content">
-                              <p class="mb-0">{{ $totalproductreviews }}</p>
-                            <div class="card-icon card-icon-orange">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M8 1v4H4v14h16V3h1.008c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993A1 1 0 0 1 2.992 3H6V1h2zm4 7l4 4h-3v4h-2v-4H8l4-4zm6-7v4h-8V3h6V1h2z"/></svg>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+{{--                      <div class="col-sm-6 col-md-3 mb-3">--}}
+{{--                        <div class="card business-card">--}}
+{{--                          <h5>Total product reviews</h5>--}}
+{{--                          <div class="card-content">--}}
+{{--                              <p class="mb-0">{{ $totalproductreviews }}</p>--}}
+{{--                            <div class="card-icon card-icon-orange">--}}
+{{--                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M8 1v4H4v14h16V3h1.008c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993A1 1 0 0 1 2.992 3H6V1h2zm4 7l4 4h-3v4h-2v-4H8l4-4zm6-7v4h-8V3h6V1h2z"/></svg>--}}
+{{--                            </div>--}}
+{{--                          </div>--}}
+{{--                        </div>--}}
+{{--                      </div>--}}
                     </div>
                   </div>
                 </div>
