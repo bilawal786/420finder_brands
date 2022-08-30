@@ -175,6 +175,19 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
         'as' => 'viewprofilebrand'
 
     ]);
+    Route::get('/account/setting/{id}', [
+
+        'uses' => 'BrandController@accountSetting',
+        'as' => 'accountSettingBrand'
+
+    ]);
+
+    Route::get('/states/brand/{id}', [
+
+        'uses' => 'BrandController@brandStates',
+        'as' => 'brandStates'
+
+    ]);
 
     Route::get('/brand/{slug}/{id}/payment', [
 

@@ -60,7 +60,7 @@
                                                 </td>
                                                 <td>
                                                     @if($brand->approve == 1)
-                                                    <a href="{{ route('viewprofilebrand', ['id' => $brand->id]) }}"
+                                                    <a href="{{ route('accountSettingBrand', ['id' => $brand->id]) }}"
                                                        class="appointment-btn">Manage</a>
                                                     @else
                                                         <span class="badge bg-warning">Unpublished</span>

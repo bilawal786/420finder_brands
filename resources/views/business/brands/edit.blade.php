@@ -59,10 +59,56 @@
                             <label for="">Name</label>
                             <input type="text" name="name" value="{{ $brand->business_name }}" class="form-control" required="">
                           </div>
-                          <div class="form-group">
+                          <div class="form-group pb-3">
                             <label for="">Description</label>
                             <textarea id="editor1" name="description" cols="5" rows="5" class="form-control" required="">{{ $brand->introduction }}</textarea>
                           </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">Address Line 1</label>
+                                        <input id="address_line_1" type="text" name="address_line_1" value="{{ $brand->address_line_1 }}" class="form-control" required="">
+                                        <input id="latitude" type="hidden" name="latitude">
+                                        <input id="longitude" type="hidden" name="longitude">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">Address Line 2</label>
+                                        <input id="address_line_2" type="text" name="address_line_2" value="{{ $brand->address_line_2 }}" class="form-control" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">City</label>
+                                        <input id="city" type="text" name="city" class="form-control" value="{{ $brand->city }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">State / Province</label>
+                                        <select required name="state_province" id="state_province" class="form-control">
+                                            <option value="">Select State</option>
+                                            @foreach ($state as $row)
+                                                <option value="{{ $row->id }}" {{ ( $row->id == $brand->state_province) ? 'selected' : '' }} > {{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">Country</label>
+                                        <input id="country" type="text" name="country" class="form-control" value="{{ $brand->country }}"  readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">Postal code</label>
+                                        <input id="postcode" type="text" name="postal_code" value="{{ $brand->postal_code }}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4><strong>License</strong></h4>
                           <div class="row mt-4">
                             <div class="col-md-6">
                               <div class="form-group">
@@ -90,6 +136,12 @@
                                 <input type="text" name="license_number" value="{{ $brand->license_number }}" class="form-control" required="">
                               </div>
                             </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="">Expiration</label>
+                                      <input type="date" name="license_expiration" value="{{ $brand->license_expiration }}" class="form-control" required="">
+                                  </div>
+                              </div>
                           </div>
                           <div class="row mt-4">
                             <div class="col-md-12">
@@ -171,3 +223,97 @@
     </section>
 
 @endsection
+@push('scripts')
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCrAR67o9XfYUXH6u66iVXYhqsOzse6Uz8"></script>
+    <script>
+        let autocomplete = '';
+        let postalField = '';
+        let address1Field = '';
+        let address2Field = '';
+        function initAutocomplete() {
+            address1Field = document.querySelector("#address_line_1");
+            address2Field = document.querySelector("#address_line_2");
+            postalField = document.querySelector("#postcode");
+
+            // Create the autocomplete object, restricting the search predictions to
+            // addresses in the US and Canada.
+            autocomplete = new google.maps.places.Autocomplete(address1Field, {
+                componentRestrictions: { country: "us" },
+                fields: ["address_components", "geometry"],
+                types: ["address"],
+            });
+            address1Field.focus();
+
+            // When the user selects an address from the drop-down, populate the
+            // address fields in the form.
+            autocomplete.addListener("place_changed", fillInAddress);
+        }
+
+        function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            const place = autocomplete.getPlace();
+            let address1 = "";
+            let postcode = "";
+
+            document.querySelector("#latitude").value = autocomplete.getPlace().geometry.location.lat();
+            document.querySelector("#longitude").value = autocomplete.getPlace().geometry.location.lng();
+
+
+
+            // Get each component of the address from the place details,
+            // and then fill-in the corresponding field on the form.
+            // place.address_components are google.maps.GeocoderAddressComponent objects
+            // which are documented at http://goo.gle/3l5i5Mr
+            for (const component of place.address_components) {
+                // @ts-ignore remove once typings fixed
+                const componentType = component.types[0];
+
+
+                switch (componentType) {
+                    case "street_number": {
+                        address1 = `${component.long_name} ${address1}`;
+                        break;
+                    }
+
+                    case "route": {
+                        address1 += component.short_name;
+                        break;
+                    }
+
+                    case "postal_code": {
+                        postcode = `${component.long_name}${postcode}`;
+                        break;
+                    }
+
+                    case "postal_code_suffix": {
+                        postcode = `${postcode}-${component.long_name}`;
+                        break;
+                    }
+
+                    case "locality":
+                        document.querySelector("#city").value = component.long_name;
+                        break;
+
+                    case "administrative_area_level_1": {
+                        // document.querySelector("#state").value = component.short_name;
+                        break;
+                    }
+
+                    case "country":
+                        document.querySelector("#country").value = component.long_name;
+                        break;
+                }
+            }
+
+            address1Field.value = address1;
+            postalField.value = postcode;
+
+            // After filling the form with address components from the Autocomplete
+            // prediction, set cursor focus on the second address line to encourage
+            // entry of subpremise information such as apartment, unit, or floor number.
+            address2Field.focus();
+        }
+        google.maps.event.addDomListener(window, 'load', initAutocomplete);
+
+    </script>
+@endpush

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Image;
 
 use App\Models\Brand;
@@ -90,6 +91,8 @@ class BrandController extends Controller {
         $brand->country = 'United States';
         $brand->postal_code = $request->postal_code;
         $brand->license_expiration = $request->license_expiration;
+        $brand->latitude = $request->latitude;
+        $brand->longitude = $request->longitude;
 
 
         if($request->hasFile('logo')) {
@@ -126,11 +129,13 @@ class BrandController extends Controller {
 //        if(is_null($this->checkIfUserBrand($id))) {
 //            return redirect()->back();
 //        }
+        $state = \Illuminate\Support\Facades\DB::table('states')->get();
 
         $brand = Business::where('id', $id)->first();
 
         return view('business.brands.edit')
-            ->with('brand', $brand);
+            ->with('brand', $brand)
+            ->with('state', $state);
 
     }
 
@@ -159,6 +164,15 @@ class BrandController extends Controller {
         $brand = Business::find($request->brand_id);
         $brand->business_name = $request->name;
         $brand->introduction = $request->description;
+        $brand->address_line_1 = $request->address_line_1;
+        $brand->address_line_2 = $request->address_line_2;
+        $brand->city = $request->city;
+        $brand->state_province = $request->state_province;
+        $brand->country = 'United States';
+        $brand->postal_code = $request->postal_code;
+        $brand->license_expiration = $request->license_expiration;
+        $brand->latitude = $request->latitude;
+        $brand->longitude = $request->longitude;
         $brandLogo = NULL;
         $brandCover = NULL;
         if($request->hasFile('logo')) {
@@ -229,6 +243,27 @@ class BrandController extends Controller {
             ->with('brand', $brand)
             ->with('business', $business);
 
+    }
+    public function accountSetting($id) {
+
+        $brand =  Business::where('id', $id)->first();
+        $active = "account-setting";
+
+
+        return view('business.brands.accountSetting')
+            ->with('active', $active)
+            ->with('brand', $brand);
+
+
+
+    }
+    public function brandStates($id) {
+
+        $active = "states";
+        DB::table('brand_addresses')->get();
+
+        return view('business.brands.states')
+            ->with('active', $active);
     }
 
     public function products($id) {
