@@ -84,17 +84,17 @@
                                         <input id="city" type="text" name="city" class="form-control" value="{{ $brand->city }}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group pb-3">
-                                        <label for="">State / Province</label>
-                                        <select required name="state_province" id="state_province" class="form-control">
-                                            <option value="">Select State</option>
-                                            @foreach ($state as $row)
-                                                <option value="{{ $row->id }}" {{ ( $row->id == $brand->state_province) ? 'selected' : '' }} > {{ $row->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group pb-3">--}}
+{{--                                        <label for="">State / Province</label>--}}
+{{--                                        <select required name="state_province" id="state_province" class="form-control">--}}
+{{--                                            <option value="">Select State</option>--}}
+{{--                                            @foreach ($state as $row)--}}
+{{--                                                <option value="{{ $row->id }}" {{ ( $row->id == $brand->state_province) ? 'selected' : '' }} > {{ $row->name }}</option>--}}
+{{--                                            @endforeach--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="col-md-6">
                                     <div class="form-group pb-3">
                                         <label for="">Country</label>

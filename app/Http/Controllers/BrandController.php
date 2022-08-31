@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Image;
 
@@ -87,7 +88,7 @@ class BrandController extends Controller {
         $brand->address_line_1 = $request->address_line_1;
         $brand->address_line_2 = $request->address_line_2;
         $brand->city = $request->city;
-        $brand->state_province = $request->state_province;
+//        $brand->state_province = $request->state_province;
         $brand->country = 'United States';
         $brand->postal_code = $request->postal_code;
         $brand->license_expiration = $request->license_expiration;
@@ -120,6 +121,11 @@ class BrandController extends Controller {
         $brand->status = $request->status;
         $brand->approve = "0";
         $brand->save();
+
+        DB::table('brand_addresses')->insertGetId([
+            'state_id'=>$request->state_province, 'brand_id'=>$brand->id, 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()
+        ]);
+
         return redirect()->back()->with('info', 'Brand Created.');
 
     }
@@ -167,7 +173,7 @@ class BrandController extends Controller {
         $brand->address_line_1 = $request->address_line_1;
         $brand->address_line_2 = $request->address_line_2;
         $brand->city = $request->city;
-        $brand->state_province = $request->state_province;
+//        $brand->state_province = $request->state_province;
         $brand->country = 'United States';
         $brand->postal_code = $request->postal_code;
         $brand->license_expiration = $request->license_expiration;
@@ -254,18 +260,40 @@ class BrandController extends Controller {
             ->with('active', $active)
             ->with('brand', $brand);
 
-
-
     }
     public function brandStates($id) {
 
+        $brand =  Business::where('id', $id)->first();
         $active = "states";
-        DB::table('brand_addresses')->get();
+        $states =  DB::table('brand_addresses')->where('brand_id', $id) ->join('states', 'state_id', '=', 'states.id')->get();
+        $statesids =  DB::table('brand_addresses')->where('brand_id', $id)->pluck('state_id');
+        if(count($statesids) > 0){
+            $getstate = DB::table('states')->where('id', '!=',  $statesids)->get();
+        }else{
+            $getstate = DB::table('states')->get();
+        }
 
         return view('business.brands.states')
-            ->with('active', $active);
+            ->with('active', $active)
+            ->with('brand', $brand)
+            ->with('states', $states)
+            ->with('getstate', $getstate);
     }
+    public function addstate(Request $request, $id){
+        validator([
+            'state_id'=> 'required'
+        ]);
+        DB::table('brand_addresses')->insertGetId([
+            'state_id'=>$request->state_id, 'brand_id'=>$id, 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()
+        ]);
 
+        return redirect()->back()->with('success', 'State Successfully Added!');
+    }
+    public function deleteState($id){
+        $stateid = request()->state_id;
+        DB::table('brand_addresses')->where('brand_id', $id)->where('state_id', $stateid)->delete();
+        return redirect()->back()->with('info', 'State Successfully Deleted!');
+    }
     public function products($id) {
 
 //        if(is_null($this->checkIfUserBrand($id))) {

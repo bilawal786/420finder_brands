@@ -188,6 +188,18 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
         'as' => 'brandStates'
 
     ]);
+    Route::post('/addstate/{id}', [
+
+        'uses' => 'BrandController@addstate',
+        'as' => 'addstate'
+
+    ]);
+    Route::get('/delete/brand/state/{id}', [
+
+        'uses' => 'BrandController@deleteState',
+        'as' => 'deleteState'
+
+    ]);
 
     Route::get('/brand/{slug}/{id}/payment', [
 
