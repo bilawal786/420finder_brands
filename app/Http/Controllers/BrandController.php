@@ -266,9 +266,12 @@ class BrandController extends Controller {
         $brand =  Business::where('id', $id)->first();
         $active = "states";
         $states =  DB::table('brand_addresses')->where('brand_id', $id) ->join('states', 'state_id', '=', 'states.id')->get();
+
         $statesids =  DB::table('brand_addresses')->where('brand_id', $id)->pluck('state_id');
+
         if(count($statesids) > 0){
-            $getstate = DB::table('states')->where('id', '!=',  $statesids)->get();
+
+            $getstate = DB::table('states')->whereNotIn('id',  $statesids)->get();
         }else{
             $getstate = DB::table('states')->get();
         }
