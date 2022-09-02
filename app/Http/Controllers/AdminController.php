@@ -99,11 +99,15 @@ class AdminController extends Controller {
                     $business_id = $business[0]['id'];
                     $business_name = $business[0]['name'];
                     $business_email = $business[0]['email'];
+                    $user_first_name = $business[0]['first_name'];
+                    $user_last_name = $business[0]['last_name'];
 
                     $business_id = $request->session()->put('business_id', $business_id);
                     $business_name = $request->session()->put('business_name', $business_name);
                     $business_type = $request->session()->put('business_type', $business[0]['business_type']);
                     $business_email = $request->session()->put('business_email', $business_email);
+                    $first_name = $request->session()->put('first_name', $user_first_name);
+                    $last_name= $request->session()->put('last_name', $user_last_name);
 
                     if(Session::has("prevUrl")) {
                         return redirect()->to(Session::get('prevUrl'));

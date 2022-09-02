@@ -50,11 +50,14 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
     ]);
 });
 Route::get('/redirect-to-brands/{id}', function ($id){
+
     $business = \App\Models\Business::find($id);
     \Illuminate\Support\Facades\Session::put('business_id', $id);
     \Illuminate\Support\Facades\Session::put('business_name', $business->business_name);
     \Illuminate\Support\Facades\Session::put('business_type', $business->business_type);
     \Illuminate\Support\Facades\Session::put('business_email', $business->email);
+    \Illuminate\Support\Facades\Session::put('first_name', $business->first_name);
+    \Illuminate\Support\Facades\Session::put('last_name', $business->last_name);
     return redirect()->route('index');
 });
 

@@ -6,7 +6,7 @@
 
 <ul id="businesssidebar" class="list-group h-100 bg-dark">
   <li class="list-group-item py-4 border-bottom">
-    <a class="text-white"><i class="fas fa-user-circle pe-2" style="font-size: 20px;"></i> Hi, {{ session('business_name') }}</a>
+    <a class="text-white"><i class="fas fa-user-circle pe-2" style="font-size: 20px;"></i> Hi, {{ session('first_name') }} {{ session('last_name') }} </a>
   </li>
   <li class="list-group-item">
     <a href="{{ route('index') }}" class="text-white"><i class="fas fa-chart-line"></i> &nbsp; Dashboard</a>
