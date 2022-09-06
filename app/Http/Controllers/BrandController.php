@@ -651,9 +651,8 @@ class BrandController extends Controller {
 
             }
 
-
-            $deliveryProduct->sku = $request->sku;
-            $deliveryProduct->price = $request->price;
+            $deliveryProduct->sku = $request->suggested_price;
+            $deliveryProduct->price = $request->suggested_price;
             $deliveryProduct->off = $request->off;
 
             if ($request->is_featured == 'on') {
@@ -1070,6 +1069,9 @@ class BrandController extends Controller {
                 $dproduct = new DispenseryProduct;
 
                 $dproduct->dispensery_id        = $getBP->retailer_id;
+                $dproduct->brand_product        = 1;
+                $dproduct->brand_product_id     = $brandproduct->id;
+                $dproduct->brand_id             = $brandproduct->brand_id;
                 $dproduct->name                 = $brandproduct->name;
                 $dproduct->slug                 = $brandproduct->name;
                 $dproduct->description          = $brandproduct->name;

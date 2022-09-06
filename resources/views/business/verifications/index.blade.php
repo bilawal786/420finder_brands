@@ -74,7 +74,7 @@
                                   @else
 
                                     @if($request->status == 0)
-                                      <a class="btn border shadow-sm text-black-50 bg-light">Rejected</a> <a href="{{ route('approveproductrequest', ['id' => $request->id]) }}" class="btn btn-primary shadow-sm me-2" onclick="return confirm('Are you sure you want to approve this request?');">Approve</a>
+                                      <a class="btn border shadow-sm text-black-50 bg-light">Rejected</a>
                                     @else
                                       <a class="btn border shadow-sm text-black-50 bg-light">Approved</a>
                                     @endif
