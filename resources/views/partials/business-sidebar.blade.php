@@ -20,9 +20,9 @@
     <a href="{{ route('stores') }}" class="text-white"><i class="fas fa-chart-line"></i> &nbsp; Businesses</a>
   </li>
 
-  <li class="list-group-item">
-    <a href="{{ route('businessaccountsettings') }}" class="text-white"><i class="fas fa-cog"></i>  Account settings</a>
-  </li>
+{{--  <li class="list-group-item">--}}
+{{--    <a href="{{ route('businessaccountsettings') }}" class="text-white"><i class="fas fa-cog"></i>  Account settings</a>--}}
+{{--  </li>--}}
   <li class="list-group-item">
     <a href="{{ route('businesslogout') }}" class="text-white" onclick="return confirm('Are you sure you want to logout?');"><i class="fas fa-sign-out-alt"></i> &nbsp; Logout</a>
   </li>
