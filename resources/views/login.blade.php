@@ -32,12 +32,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4" style="margin: 100px auto;">
+                <div class="col-md-4 mdn" style="margin: 100px auto;">
                     <P class="text-center p-side">CREATE, MANAGE,<br><span style="font-size: 5rem; position: relative; bottom: 15px;">GET DISCOVERED</span></P>
                 </div>
                 <div class="col-md-4">
                     <h1 class="text-center h-logo">BRANDS</h1>
-                    <div class="card">
+                    <div class="card" style="margin: 0 30px;">
                         <div class="card-body m-3">
                             <form method="POST" action="{{ route('authenticate') }}">
                                 @csrf
@@ -86,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 d-sm-none" style="margin: 100px auto;">
+                <div class="col-md-4 mdn" style="margin: 100px auto;">
                     <P class="text-center p-side"><span style="position: relative; bottom: 15px">THE MOST MODERN AND </span><br>
                         <span style="position: relative; bottom: 20px;">EFFICIENT WAY TO GROW</span><br>
                         <span style="position: relative; bottom: 30px;">YOUR CONNABIS COMPANY</span>

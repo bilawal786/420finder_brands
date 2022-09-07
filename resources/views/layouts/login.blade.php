@@ -41,7 +41,7 @@
             background-image: url({{asset('images/login/BACKGROUND.PNG')}});
             background-color: #ec982f !important;
             background-repeat: no-repeat;
-            background-size: 100% auto;
+            background-size: 100% 100vh;
             background-position: center top;
             background-attachment: fixed;
         }
@@ -70,6 +70,14 @@
         }
         .p-d-none{
             display: none;
+        }
+        @media only screen and (max-width: 600px) {
+            .mdn{
+                display: none;
+            }
+            .destopnone{
+                display: block;
+            }
         }
     </style>
 
