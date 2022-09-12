@@ -61,7 +61,7 @@
                           </div>
                           <div class="form-group pb-3">
                             <label for="">Description</label>
-                            <textarea id="editor1" name="description" cols="5" rows="5" class="form-control" required="">{{ $brand->introduction }}</textarea>
+                            <textarea id="editor1" name="description" cols="5" rows="5" class="form-control">{{ $brand->introduction }}</textarea>
                           </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -75,7 +75,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group pb-3">
                                         <label for="">Address Line 2</label>
-                                        <input id="address_line_2" type="text" name="address_line_2" value="{{ $brand->address_line_2 }}" class="form-control" required="">
+                                        <input id="address_line_2" type="text" name="address_line_2" value="{{ $brand->address_line_2 }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">

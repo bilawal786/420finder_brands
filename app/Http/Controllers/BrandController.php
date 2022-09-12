@@ -64,15 +64,8 @@ class BrandController extends Controller {
 
         $validated = $request->validate([
             'name' => 'required',
-            'description' => 'required',
             'license_type' => 'required',
             'license_number' => 'required',
-            'yt_featured_url' => 'required',
-            'yt_playlist_url' => 'required',
-            'website_url' => 'required',
-            'instagram_url' => 'required',
-            'twitter_url' => 'required',
-            'facebook_url' => 'required',
             'status' => 'required',
             'logo' => 'required|image',
             'cover' => 'required|image'
@@ -88,7 +81,7 @@ class BrandController extends Controller {
         $brand->address_line_1 = $request->address_line_1;
         $brand->address_line_2 = $request->address_line_2;
         $brand->city = $request->city;
-//        $brand->state_province = $request->state_province;
+        $brand->state_province = $request->state_province;
         $brand->country = 'United States';
         $brand->postal_code = $request->postal_code;
         $brand->license_expiration = $request->license_expiration;
@@ -149,16 +142,9 @@ class BrandController extends Controller {
 
         $validated = $request->validate([
             'name' => 'required',
-            'description' => 'required',
             'brand_id' => 'required',
             'license_type' => 'required',
             'license_number' => 'required',
-            'yt_featured_url' => 'required',
-            'yt_playlist_url' => 'required',
-            'website_url' => 'required',
-            'instagram_url' => 'required',
-            'twitter_url' => 'required',
-            'facebook_url' => 'required',
             'status' => 'required'
         ]);
 
