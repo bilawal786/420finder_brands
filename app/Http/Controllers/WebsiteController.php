@@ -2421,6 +2421,8 @@ public function addtocartdelivery(Request $request) {
       $business->city = $request->city;
       $business->state_province = $request->state_province;
       $business->postal_code = $request->postal_code;
+      $business->latitude = $request->latitude;
+      $business->longitude = $request->longitude;
       $business->website = $request->website;
       $business->license_number = $request->license_number;
       $business->license_type = $request->license_type;

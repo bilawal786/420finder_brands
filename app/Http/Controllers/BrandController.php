@@ -84,6 +84,7 @@ class BrandController extends Controller {
         $brand->state_province = $request->state_province;
         $brand->country = 'United States';
         $brand->postal_code = $request->postal_code;
+        $brand->business_phone_number = $request->business_phone_number;
         $brand->license_expiration = $request->license_expiration;
         $brand->latitude = $request->latitude;
         $brand->longitude = $request->longitude;
@@ -162,6 +163,7 @@ class BrandController extends Controller {
 //        $brand->state_province = $request->state_province;
         $brand->country = 'United States';
         $brand->postal_code = $request->postal_code;
+        $brand->business_phone_number = $request->business_phone_number;
         $brand->license_expiration = $request->license_expiration;
         $brand->latitude = $request->latitude;
         $brand->longitude = $request->longitude;

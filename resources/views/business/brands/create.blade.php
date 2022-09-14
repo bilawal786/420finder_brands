@@ -76,7 +76,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group pb-3">
                                         <label for="">State / Province</label>
-                                        <select required name="state_province" id="state_province" class="form-control">
+                                        <select required name="state_province" id="state_province" class="form-control" readonly>
                                             <option value="">Select State</option>
                                             @foreach ($state as $row)
                                                 <option value="{{ $row->id }}" > {{ $row->name }}</option>
@@ -94,6 +94,12 @@
                                     <div class="form-group pb-3">
                                         <label for="">Postal code</label>
                                         <input id="postcode" type="text" name="postal_code" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">Business Phone #</label>
+                                        <input  type="text" name="business_phone_number" id="businessPhoneNumber" class="form-control" >
                                     </div>
                                 </div>
                             </div>
@@ -274,6 +280,29 @@
 
                     case "administrative_area_level_1": {
                         // document.querySelector("#state").value = component.short_name;
+
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: "/states",
+                            method:"GET",
+                            success:function(data) {
+
+                                data.forEach(myFunction)
+
+                                function myFunction(item, index, arr) {
+
+                                    if(arr[index].name == component.long_name){
+                                        console.log(arr[index].id);
+                                        document.querySelector("#state_province").value = arr[index].id;
+
+                                    }
+                                }
+                            }
+                        });
+
+
                         break;
                     }
 
@@ -293,5 +322,12 @@
         }
         google.maps.event.addDomListener(window, 'load', initAutocomplete);
 
+        $('#businessPhoneNumber').on('change', function() {
+            let phoneNumber = $('#businessPhoneNumber').val();
+            let x = phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            phoneNumber = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+
+            $('#businessPhoneNumber').val(phoneNumber);
+        });
     </script>
 @endpush

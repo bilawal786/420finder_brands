@@ -84,6 +84,7 @@
                                         <input id="city" type="text" name="city" class="form-control" value="{{ $brand->city }}" readonly>
                                     </div>
                                 </div>
+
 {{--                                <div class="col-md-6">--}}
 {{--                                    <div class="form-group pb-3">--}}
 {{--                                        <label for="">State / Province</label>--}}
@@ -105,6 +106,12 @@
                                     <div class="form-group pb-3">
                                         <label for="">Postal code</label>
                                         <input id="postcode" type="text" name="postal_code" value="{{ $brand->postal_code }}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group pb-3">
+                                        <label for="">Business Phone #</label>
+                                        <input  type="text" name="business_phone_number" id="businessPhoneNumber" class="form-control" value="{{ $brand->business_phone_number }}" >
                                     </div>
                                 </div>
                             </div>
@@ -296,6 +303,28 @@
 
                     case "administrative_area_level_1": {
                         // document.querySelector("#state").value = component.short_name;
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: "/states",
+                            method:"GET",
+                            success:function(data) {
+
+                                data.forEach(myFunction)
+
+                                function myFunction(item, index, arr) {
+
+                                    if(arr[index].name == component.long_name){
+                                        console.log(arr[index].id);
+                                        document.querySelector("#state_province").value = arr[index].id;
+
+                                    }
+                                }
+                            }
+                        });
+
+
                         break;
                     }
 
@@ -314,6 +343,14 @@
             address2Field.focus();
         }
         google.maps.event.addDomListener(window, 'load', initAutocomplete);
+
+        $('#businessPhoneNumber').on('change', function() {
+            let phoneNumber = $('#businessPhoneNumber').val();
+            let x = phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            phoneNumber = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+
+            $('#businessPhoneNumber').val(phoneNumber);
+        });
 
     </script>
 @endpush

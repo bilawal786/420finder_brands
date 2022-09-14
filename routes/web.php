@@ -361,6 +361,7 @@ Route::group(['namespace' =>'App\Http\Controllers', 'middleware' => ['checkIfAut
         'as' => 'stores'
 
     ]);
+    Route::get('/states', 'StateController@index');
 
 
 });
