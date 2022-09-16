@@ -38,9 +38,29 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
     @yield('styles')
+    <style>
+        .mobile-view{
+            position: fixed;
+            z-index: 5000;
+            width: 100%;
+            height: 100vh;
+        }
 
+        @media only screen and (max-width: 600px) {
+            .main-content{
+                display: none;
+            }
+            .container-fluid{
+                display: none;
+            }
+            .mobile-view{
+                display: block !important;
+            }
+        }
+    </style>
 </head>
 <body>
+<img src="{{asset('images/mobile-view.jpg')}}" style="display: none" class="mobile-view">
   <div id="element" class="introLoading"></div>
     <div id="wrapper">
 

@@ -20,10 +20,10 @@
                 <div class="col-md-4 text-center">
                     <div class="row mb-5">
                         <div class="col-xs-6">
-                            <img style="width: 100%;" src="{{asset('images/login/420 FINDER logo.png')}}">
+                            <img style="width: 100%;" src="{{asset('images/login/02.png')}}">
                         </div>
                         <div class="col-xs-6 vl">
-                            <img style="width: 80%;" src="{{asset('images/login/420 FINDER BIZ logo.png')}}">
+                            <img style="width: 80%;" src="{{asset('images/login/01.png')}}">
                         </div>
                     </div>
                 </div>

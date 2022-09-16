@@ -7,7 +7,9 @@
     <div class="content-sidebar">
       @include('partials/business-sidebar')
     </div>
-    <div class="content-main dashboard-content bg-light">
+      <img src="{{asset('images/mobile-view.jpg')}}" style="display: none" class="mobile-view">
+
+      <div class="content-main dashboard-content bg-light">
 
        @yield('content')
 

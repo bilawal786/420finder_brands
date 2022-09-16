@@ -423,6 +423,39 @@
         .label-default {
             background-color: orange;
         }
+        .mobile-view{
+            position: fixed;
+            z-index: 5000;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            bottom: 0;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .content-main{
+                display: none !important;
+            }
+            .dash-analytics{
+                display: none;
+            }
+            .chart-row{
+                display: none;
+            }
+            .navbar-default{
+                display: none !important;
+            }
+            .brand {
+                display: none !important;
+            }
+            .container-fluid{
+                display: none;
+            }
+            .mobile-view{
+                display: block !important;
+            }
+        }
     </style>
+
     @yield('styles')
 

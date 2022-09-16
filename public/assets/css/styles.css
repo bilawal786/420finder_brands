@@ -2344,3 +2344,31 @@ img.img-responsive.logo {
     height: 74px;
     padding: 1rem;
 }
+.d-box{
+    background-image: url("../../images/MAP MARKER LOGO.png"), linear-gradient(to right, #f58221 , #faac1d);
+    color: #ffffff;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+@media screen and (min-width: 1080px) {
+    .d-size {
+        font-size: 5rem;
+    }
+}
+@media screen and (min-width: 769px) {
+    .d-size {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (min-device-width: 481px) and (max-device-width: 768px) {
+    .d-size {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-device-width: 600px) {
+    .d-size {
+        font-size: 2rem;
+    }
+}

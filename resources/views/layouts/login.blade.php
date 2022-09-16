@@ -38,7 +38,7 @@
     @yield('styles')
     <style>
         .login-back{
-            background-image: url({{asset('images/login/BACKGROUND.PNG')}});
+            background-image: url({{asset('images/login/03.png')}});
             background-color: #ec982f !important;
             background-repeat: no-repeat;
             background-size: 100% 100vh;

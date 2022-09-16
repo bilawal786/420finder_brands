@@ -3,10 +3,13 @@
     @section('title', '420 Finder')
 
     @section('content')
-       <div class="dash-analytics">
-            <h4>Master Dashboard</h4>
 
-                <p class="text-black-50">Today's Analytics</p>
+        <div class="dash-analytics">
+           <div class="d-box text-center p-4 mb-5" style="border-radius: 20px;">
+               <h1 style="font-weight: 900; font-style: italic;" class="d-size">MASTER DASHBOARD</h1>
+           </div>
+
+{{--                <p class="text-black-50">Today's Analytics</p>--}}
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <div class="row">
@@ -14,12 +17,10 @@
                         <div class="card business-card">
                             <h5>Total brands</h5>
                           <div class="card-content">
-
                               <p class="mb-0">{{ $totalbrands }}</p>
                               <div class="card-icon card-icon-blue">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4zM4 16v3h16v-3H4zm0-2h16V7H4v7zM9 3v2h6V3H9zm2 8h2v2h-2v-2z"></path></svg>
                             </div>
-
                           </div>
                         </div>
                       </div>
@@ -44,7 +45,6 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4zM4 16v3h16v-3H4zm0-2h16V7H4v7zM9 3v2h6V3H9zm2 8h2v2h-2v-2z"></path></svg>
                               </div>
                           </div>
-
                         </div>
                       </div>
                       <div class="col-sm-6 col-md-3 mb-3">
