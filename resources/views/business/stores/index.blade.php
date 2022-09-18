@@ -3,7 +3,10 @@
 @section('title', '420 Finder')
 
 @section('content')
-
+    <div class="dash-analytics">
+        <div class="d-box text-center p-4 mb-5" style="border-radius: 20px;">
+            <h1 style="font-weight: 900; font-style: italic;" class="d-size">MASTER DASHBOARD</h1>
+        </div>
     <section class="pb-0">
         <div class="container-fluid px-0">
             <div class="row">
