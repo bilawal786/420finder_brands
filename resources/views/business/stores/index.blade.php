@@ -5,12 +5,12 @@
 @section('content')
     <div class="dash-analytics">
         <div class="d-box text-center p-4 mb-5" style="border-radius: 20px;">
-            <h1 style="font-weight: 900; font-style: italic;" class="d-size">MASTER DASHBOARD</h1>
+            <h1 style="font-weight: 900; font-style: italic;" class="d-size">BUSINESSES</h1>
         </div>
-    <section class="pb-0">
+    <section class="p-0">
         <div class="container-fluid px-0">
             <div class="row">
-                <div class="col-md-12 p-5 bg-light">
+                <div class="col-md-12 pX-5 bg-light">
                     <div class="card mb-5">
                         <div class="card-body">
                             <div class="row">
