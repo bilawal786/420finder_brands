@@ -13,9 +13,9 @@
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <div class="row">
-                      <div class="col-sm-6 col-md-3 mb-3">
+                      <div class="col-sm-6 col-md-4 mb-3">
                         <div class="card business-card">
-                            <h5>Total brands</h5>
+                            <h5>Brands</h5>
                           <div class="card-content">
                               <p class="mb-0">{{ $totalbrands }}</p>
                               <div class="card-icon card-icon-blue">
@@ -24,9 +24,9 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-6 col-md-3 mb-3">
+                      <div class="col-sm-6 col-md-4 mb-3">
                         <div class="card business-card">
-                            <h5>Total published brands</h5>
+                            <h5>Published Brands</h5>
                           <div class="card-content">
                               <p class="mb-0">{{ $publishedbrands }}</p>
                               <div class="card-icon card-icon-blue">
@@ -36,9 +36,9 @@
 
                         </div>
                       </div>
-                      <div class="col-sm-6 col-md-3 mb-3">
+                      <div class="col-sm-6 col-md-4 mb-3">
                         <div class="card business-card">
-                          <h5>Total unpublished brands</h5>
+                          <h5>Unpublished Brands</h5>
                           <div class="card-content">
                             <p class="mb-0">{{ $unpublishedbrands }}</p>
                             <div class="card-icon card-icon-blue">
@@ -47,9 +47,9 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-6 col-md-3 mb-3">
+                      <div class="col-sm-6 col-md4 mb-3">
                         <div class="card business-card">
-                          <h5>Total Delivery</h5>
+                          <h5>Deliveries</h5>
                           <div class="card-content">
                             <p class="mb-0">{{ $totalDelivery }}</p>
                             <div class="card-icon card-icon-purple">
@@ -58,9 +58,9 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-6 col-md-3 mb-3">
+                      <div class="col-sm-6 col-md-4 mb-3">
                         <div class="card business-card">
-                            <h5>Total Dispensary</h5>
+                            <h5>Dispensaries</h5>
                           <div class="card-content">
                               <p class="mb-0">{{ $totalDispensary }}</p>
                               <div class="card-icon card-icon-orange">
