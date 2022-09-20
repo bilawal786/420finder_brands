@@ -3,7 +3,7 @@
     <div class="brand">
 
         <a href="{{ asset('index') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="Klorofil Logo" class="img-responsive logo">
+            <img style="padding: 0px" src="https://420finder.net/420finder_business_logo_transparent.png" alt="Klorofil Logo" class="img-responsive logo">
         </a>
 
         @if(!request()->routeIs('approve.failed'))
