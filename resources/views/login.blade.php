@@ -11,6 +11,24 @@
         padding: 30px;
         box-shadow: 0 8px 6px -6px #959595;
     }
+    .destopnone{
+        display: none;
+    }
+    @media only screen and (max-width: 600px) {
+        .mdn{
+            display: none;
+        }
+        .destopnone{
+            display: block !important;
+            margin: 10px !important;
+        }
+        .card{
+            margin: 0px !important;
+        }
+        .p0{
+            padding: 10px !important;
+        }
+    }
 </style>
 <div class="">
             <div class="row">
@@ -86,10 +104,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4 destopnone" style="margin: 100px auto;">
+                    <P class="text-center p-side">CREATE, MANAGE,<br><span style="font-size: 4rem; position: relative; bottom: 15px;">GET DISCOVERED</span></P>
+                </div>
                 <div class="col-md-4 mdn" style="margin: 100px auto;">
                     <P class="text-center p-side"><span style="position: relative; bottom: 15px">THE MOST MODERN AND </span><br>
                         <span style="position: relative; bottom: 20px;">EFFICIENT WAY TO GROW</span><br>
-                        <span style="position: relative; bottom: 30px;">YOUR CONNABIS COMPANY</span>
+                        <span style="position: relative; bottom: 30px;">YOUR CANNABIS COMPANY</span>
                     </P>
                 </div>
             </div>
