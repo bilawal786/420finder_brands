@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-4 mb-3">
+                   {{-- <div class="col-sm-6 col-md-4 mb-3">
                         <div class="card business-card">
                             <h5>Published Brands</h5>
                             <div class="card-content">
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                     <div class="col-sm-6 col-md-4 mb-3">
                         <div class="card business-card">
                             <h5>Deliveries</h5>
