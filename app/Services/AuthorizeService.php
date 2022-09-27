@@ -20,8 +20,8 @@ function chargeCreditCard($validated, $amount = 5.00)
     /* Create a merchantAuthenticationType object with authentication details
        retrieved from the constants file */
     $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-    $merchantAuthentication->setName('72j25hCmFnY'); // LOGIN ID
-    $merchantAuthentication->setTransactionKey('45qM9GBv92Kz9N3z'); // TRANSACTION KEY
+    $merchantAuthentication->setName('2aDh57zQm'); // LOGIN ID
+    $merchantAuthentication->setTransactionKey('3NR84b94vU25wj8Y'); // TRANSACTION KEY
 
     // Set the transaction's refId
     $refId = 'ref' . time();
