@@ -78,10 +78,10 @@ class BusinessController extends Controller
         $totalbrands = Business::where('email', session('business_email'))->where('business_type', 'Brand')->count();
 
 //        $totalbrands = Brand::where('business_id', session('business_id'))->count();
-        $publishedbrands = Business::where('email', session('business_email'))->where('business_type', 'Brand')->where('status', 1)->count();
-        $unpublishedbrands = Business::where('email', session('business_email'))->where('business_type', 'Brand')->where('status', 0)->count();
-        $totalDelivery = Business::where('email', session('business_email'))->where('business_type', '=', 'Delivery')->count();
-        $totalDispensary = Business::where('email', session('business_email'))->where('business_type', '=', 'Dispensary')->count();
+        $publishedbrands = Business::where('email', session('business_email'))->where('email', '!=', null)->where('business_type', 'Brand')->where('status', 1)->count();
+        $unpublishedbrands = Business::where('email', session('business_email'))->where('email', '!=', null)->where('business_type', 'Brand')->where('status', 0)->count();
+        $totalDelivery = Business::where('email', session('business_email'))->where('email', '!=', null)->where('business_type', '=', 'Delivery')->count();
+        $totalDispensary = Business::where('email', session('business_email'))->where('email', '!=', null)->where('business_type', '=', 'Dispensary')->count();
         $totalfeeds = BrandFeed::where('business_id', session('business_id'))->count();
 
         $brandids = Brand::where('business_id', session('business_id'))->select('id')->get();
