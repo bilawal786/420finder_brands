@@ -36,7 +36,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
     @yield('styles')
-
+    <style>
+        .sidebar .nav span {
+            font-weight: bold !important;
+        }
+    </style>
 </head>
 <body>
   <div id="element" class="introLoading"></div>

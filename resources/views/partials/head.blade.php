@@ -31,6 +31,11 @@
 
 <body>
     <style>
+        #businesssidebar .list-group-item a {
+            padding: 18px 30px;
+            display: block;
+            font-weight: bold;
+        }
         @media(max-width: 980px) {
             img.card-img-top {
                 width: 100% !important;
@@ -378,7 +383,9 @@
         }
 
     }
-
+        .sidebar .nav span {
+            font-weight: bold !important;
+        }
     .panel-title {
        display: inline;
        font-weight: bold;
