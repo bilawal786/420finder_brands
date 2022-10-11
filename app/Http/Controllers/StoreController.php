@@ -1,10 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Business;
-use Illuminate\Http\Request;
-
 class StoreController extends Controller
 {
     public function index()
@@ -13,7 +9,6 @@ class StoreController extends Controller
         return view('requestproducts.index')
             ->with('brands', $brands);
     }
-
     public function stores()
     {
         $stores = Business::where('email', session('business_email'))->where('email', '!=', null)->where('business_type', '!=', 'Brand')->get();
