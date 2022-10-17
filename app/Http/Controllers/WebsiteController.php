@@ -35,6 +35,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+
 class WebsiteController extends Controller
 {
     public function index()
@@ -1679,6 +1681,7 @@ class WebsiteController extends Controller
         $business->password = Hash::make($request->password);
         $business->role = $request->role;
         $business->business_name = $request->business_name;
+        $business->slug = Str::slug($request->business_name);
         $business->business_type = $request->business_type;
         $business->country = $request->country;
         $business->address_line_1 = $request->address_line_1;
@@ -1716,6 +1719,7 @@ class WebsiteController extends Controller
         $business->password = $check->password;
         $business->role = $request->role;
         $business->business_name = $request->business_name;
+        $business->slug = Str::slug($request->business_name);
         $business->email = session('business_email');
         $business->business_type = $request->business_type;
         $business->country = $request->country;

@@ -229,6 +229,7 @@ class BrandController extends Controller
         $myBusiness = Business::where('id', session('business_id'))->first();
         $brand = new Business();
         $brand->business_name = $request->name;
+        $brand->slug = Str::slug($request->business_name);
         $brand->introduction = $request->description;
         $brand->email = $myBusiness->email;
         $brand->phone_number = $myBusiness->phone_number;
