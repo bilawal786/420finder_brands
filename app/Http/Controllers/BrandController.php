@@ -255,7 +255,7 @@ class BrandController extends Controller
             $avatar = $request->file('cover');
             $filename = time() . '.' . $avatar->GetClientOriginalExtension();
             $avatar_img = Image::make($avatar);
-            $avatar_img->resize(770, 218)->save(public_path('images/brands/cover/' . $filename));
+            $avatar_img->resize(1600, 453)->save(public_path('images/brands/cover/' . $filename));
             $brand->cover = asset("images/brands/cover/" . $filename);
         }
         $brand->license_type = $request->license_type;
@@ -1003,7 +1003,7 @@ class BrandController extends Controller
             $avatar = $request->file('cover');
             $filename = time() . '.' . $avatar->GetClientOriginalExtension();
             $avatar_img = Image::make($avatar);
-            $avatar_img->resize(770, 218)->save(public_path('images/brands/cover/' . $filename));
+            $avatar_img->resize(1600, 453)->save(public_path('images/brands/cover/' . $filename));
             $brandCover = $brand->cover;
             $brand->cover = asset("images/brands/cover/" . $filename);
         }
