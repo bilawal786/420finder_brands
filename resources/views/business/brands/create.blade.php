@@ -164,8 +164,12 @@
                                 <img src="{{ asset('placeholder-cover.png') }}" alt="" class="w-50 img-thumbnail">
                               </div>
                               <div class="form-group pt-3">
-                                <label for="">Desktop hero image</label>
-                                <input type="file" name="cover" class="form-control" required="">
+                                <label for="">Desktop hero image (1600 * 453)</label>
+                                <input type="file"  accept="image/png, image/jpg, image/jpeg" name="cover" class="form-control" required="">
+                              </div>
+                              <div class="form-group pt-3">
+                                <label for="">Mobile hero image (600 * 370)</label>
+                                <input type="file"  accept="image/png, image/jpg, image/jpeg" name="mobile_cover" class="form-control" required="">
                               </div>
                             </div>
                           </div>

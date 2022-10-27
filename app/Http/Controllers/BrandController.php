@@ -258,6 +258,13 @@ class BrandController extends Controller
             $avatar_img->resize(1600, 453)->save(public_path('images/brands/cover/' . $filename));
             $brand->cover = asset("images/brands/cover/" . $filename);
         }
+        if ($request->hasFile('mobile_cover')) {
+            $avatar = $request->file('mobile_cover');
+            $filename = time() . '.' . $avatar->GetClientOriginalExtension();
+            $avatar_img = Image::make($avatar);
+            $avatar_img->resize(600, 370)->save(public_path('images/brands/cover/' . $filename));
+            $brand->mobile_cover = asset("images/brands/cover/" . $filename);
+        }
         $brand->license_type = $request->license_type;
         $brand->license_number = $request->license_number;
         $brand->yt_featured_url = $request->yt_featured_url;
@@ -1006,6 +1013,13 @@ class BrandController extends Controller
             $avatar_img->resize(1600, 453)->save(public_path('images/brands/cover/' . $filename));
             $brandCover = $brand->cover;
             $brand->cover = asset("images/brands/cover/" . $filename);
+        }
+        if ($request->hasFile('mobile_cover')) {
+            $avatar = $request->file('mobile_cover');
+            $filename = time() . '.' . $avatar->GetClientOriginalExtension();
+            $avatar_img = Image::make($avatar);
+            $avatar_img->resize(600, 370)->save(public_path('images/brands/cover/' . $filename));
+            $brand->mobile_cover = asset("images/brands/cover/" . $filename);
         }
         $brand->license_type = $request->license_type;
         $brand->license_number = $request->license_number;
