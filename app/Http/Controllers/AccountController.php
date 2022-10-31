@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use App\Models\StoreLocation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Image;
 class AccountController extends Controller
 {
@@ -146,5 +147,12 @@ class AccountController extends Controller
         $location = StoreLocation::find($id);
         $location->delete();
         return redirect()->back()->with('info', 'Store Location Removed.');
+    }
+    public function addStrain(Request $request)
+    {
+        DB::table('strains')->insert([
+            'name' => $request->strain
+        ]);
+        return redirect()->back()->with('info', 'Strain Added Successfully.');
     }
 }

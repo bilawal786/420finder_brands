@@ -221,6 +221,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['checkIfAu
         'as' => 'stores'
     ]);
     Route::get('/states', 'StateController@index');
+    Route::post('add/strain', 'AccountController@addStrain')->name('add.strain');
 });
 Route::group(['middleware' => ['checkIfAuthenticated']], function () {
     Route::get('/approve/failed', [ApproveController::class, 'approveFailed'])->name('approve.failed');
