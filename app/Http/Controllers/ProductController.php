@@ -95,11 +95,13 @@ class ProductController extends Controller
         $gallery = DeliveryProductGallery::where('delivery_product_id', $id)->get();
         $strains = Strain::all();
         $genetics = Genetic::all();
+        $categories = Category::all();
         return view('products.edit')
             ->with('product', $product)
             ->with('gallery', $gallery)
             ->with('strains', $strains)
-            ->with('genetics', $genetics);
+            ->with('genetics', $genetics)
+            ->with('categories', $categories);
     }
     /*
     *  CREATE PRODUCT

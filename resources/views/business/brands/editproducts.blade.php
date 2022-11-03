@@ -129,6 +129,35 @@
                               </div>
                             </div>
                           </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <h5><strong>Categorization</strong></h5>
+                                </div>
+                                <div class="col-md-3 border p-3">
+                                    <h6 class="mb-3"><strong>Main Categories <span
+                                                class="text-danger">*</span></strong></h6>
+                                    <ul class="list-unstyled">
+                                        @foreach($categories as $category)
+                                            <li class="mb-2">
+                                                <label for="">
+                                                    <input {{$category->id == $product->category_id ? "checked" : ""}} rel="{{ $category->name }}" type="radio"
+                                                           name="category_id" class="mainCategory"
+                                                           value="{{ $category->id }}"
+                                                           required=""> {{ $category->name }}
+                                                </label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                {{-- <div class="col-md-9 border p-3">
+                                  <div class="row border p-2 mb-3">
+                                    <div class="col-md-12 selectedcats">
+                                      Start by selecting a main category
+                                    </div>
+                                  </div>
+                                  <div id="typesubcategories"></div>
+                                </div> --}}
+                            </div>
                           <div class="form-group pt-4">
                             <div class="row">
                               <div class="col-md-12">

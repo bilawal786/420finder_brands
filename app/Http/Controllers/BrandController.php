@@ -355,6 +355,7 @@ class BrandController extends Controller
 //        }
         $product = BrandProduct::find($request->product_id);
         $product->name = $request->name;
+        $product->category_id = $request->category_id;
         $product->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->name)));
         $product->description = $request->description;
         $oldBrandImage = NULL;
